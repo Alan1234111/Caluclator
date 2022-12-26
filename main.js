@@ -1,20 +1,8 @@
-// reduce works on an array
+//   operate
+//    1. sprawdza jaka uzytkownik wprowadzil 1 liczbe i zapisz w tablicy
+//    2. jesli jest to liczba dodaj ja jako total
+//    3. jesli jest to operator sprawdz jaki
+//    4. odowolaj do zewnetrznej funkcji
 
-// if operations === *
-//   return total * number
-
-//take all buttons
-// if user click the button operation
-//     add number to an array
-
-const allButtons = document.querySelectorAll(".buttons button");
-
-const numberToOperate = [2, 5, 6];
-const operations = ["+", "*"];
-
-// numberToOperate.reduce((total, numbers) => {});
-function operate() {
-  console.log("dzial");
-}
-
-allButtons.forEach((button) => button.addEventListener("click", operate));
+///  add
+//    1. jesli nie ma podancyh dwoch liczb zwraca
