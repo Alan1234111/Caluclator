@@ -10,7 +10,7 @@ const operationsInput = document.querySelector(".operations-input");
 const result = document.querySelector(".result");
 
 let operator = [];
-let operateNumber = null;
+let operateNumber = 0;
 let total = null;
 let mathOperation = "";
 
@@ -27,43 +27,43 @@ function displayResult() {
 function equals() {
   if (total == null) {
     total = operateNumber;
-    operateNumber = null;
+    operateNumber = 0;
   }
 
-  if (operateNumber == null) return;
+  if (operateNumber == 0) return;
 
-  parseTotal = parseInt(total);
-  parseOperateNumber = parseInt(operateNumber);
+  parseTotal = parseFloat(total);
+  parseOperateNumber = parseFloat(operateNumber);
 
   switch (operator[0]) {
     case "+":
       mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
       total = parseTotal + parseOperateNumber;
-      operateNumber = null;
+      operateNumber = 0;
       displayOperations();
       break;
     case "-":
       mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
       total = parseTotal - parseOperateNumber;
-      operateNumber = null;
+      operateNumber = 0;
       displayOperations();
       break;
     case "x":
       mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
       total = parseTotal * parseOperateNumber;
-      operateNumber = null;
+      operateNumber = 0;
       displayOperations();
       break;
     case "/":
       mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
       total = parseTotal / parseOperateNumber;
-      operateNumber = null;
+      operateNumber = 0;
       displayOperations();
       break;
     case "%":
       mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
       total = parseTotal % parseOperateNumber;
-      operateNumber = null;
+      operateNumber = 0;
       displayOperations();
 
       break;
@@ -72,9 +72,17 @@ function equals() {
 
 function operate() {
   if (this.dataset.type == "number") {
-    operateNumber == null ? (operateNumber = this.value) : (operateNumber += this.value);
+    operateNumber == 0 ? (operateNumber = this.value) : (operateNumber += this.value);
     result.textContent = operateNumber;
   }
+
+  if (this.dataset.type == "decimal") {
+    if (operateNumber.includes(".")) return;
+    operateNumber += ".";
+    result.textContent = operateNumber;
+  }
+
+  if (operateNumber == 0 && this.value == "/") return alert(`You can't divide by 0`);
 
   if (this.dataset.type == "operator") {
     // debugger;
@@ -118,6 +126,7 @@ function operate() {
   }
 
   if (this.dataset.type == "equals") {
+    if (operateNumber == 0 && operator[0] == "/") return alert(`You can't divide by 0`);
     mathOperation = "";
     equals();
     displayResult();
@@ -125,14 +134,14 @@ function operate() {
 
   if (this.dataset.type == "reset") {
     operator = [];
-    operateNumber = null;
+    operateNumber = 0;
     total = null;
     mathOperation = "";
     displayResult();
   }
 
   if (this.dataset.type == "clear") {
-    if (operateNumber == null) return;
+    if (operateNumber == 0) return;
     operateNumber = operateNumber.slice(0, -1);
     result.textContent = operateNumber;
   }
