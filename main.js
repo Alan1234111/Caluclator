@@ -6,7 +6,6 @@
 //   w inputUser wyswietlana jest liczba total wraz z operatorem
 
 const allButtons = document.querySelectorAll(".buttons button");
-// total + operator
 const operationsInput = document.querySelector(".operations-input");
 const result = document.querySelector(".result");
 
@@ -78,29 +77,39 @@ function operate() {
   }
 
   if (this.dataset.type == "operator") {
-    operator = [];
+    // debugger;
     switch (this.value) {
       case "+":
+        equals();
+        operator = [];
         operator.push(this.value);
         equals();
         displayOperations();
         break;
       case "-":
+        equals();
+        operator = [];
         operator.push(this.value);
         equals();
         displayOperations();
         break;
       case "x":
+        equals();
+        operator = [];
         operator.push(this.value);
         equals();
         displayOperations();
         break;
       case "/":
+        equals();
+        operator = [];
         operator.push(this.value);
         equals();
         displayOperations();
         break;
       case "%":
+        equals();
+        operator = [];
         operator.push(this.value);
         equals();
         displayOperations();
