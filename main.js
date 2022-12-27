@@ -1,54 +1,117 @@
-//   operate
-//    1. sprawdza jaka uzytkownik wprowadzil 1 liczbe i zapisz w tablicy
-//    2. jesli jest to liczba dodaj ja jako total
-//    3. jesli jest to operator sprawdz jaki
-//    4. odowolaj do zewnetrznej funkcji
-
-///  add
-//    1. jesli nie ma podancyh dwoch liczb zwraca
+// Uzytkownik wprowadza liczbe
+// liczba ta zapisywana jest jako operateNumber
+// jesli uzytkownik nacisnie jakis operator
+//   do liczby z total zostaje wykonana akcja z operatora
+//   w result wyswietlana jest liczba total
+//   w inputUser wyswietlana jest liczba total wraz z operatorem
 
 const allButtons = document.querySelectorAll(".buttons button");
-const userInput = document.querySelector(".user-input");
+// total + operator
+const operationsInput = document.querySelector(".operations-input");
 const result = document.querySelector(".result");
 
-let operateNumber = 0;
-let total = 0;
+let operator = [];
+let operateNumber = null;
+let total = null;
+let mathOperation = "";
 
-function displayResult() {
+function displayOperations() {
+  operationsInput.textContent = `${total} ${operator[0]}`;
   result.textContent = total;
 }
 
-function add() {
-  if (operateNumber === 0) return;
-
-  total += parseInt(operateNumber);
-  displayResult();
+function displayResult() {
+  operationsInput.textContent = mathOperation;
+  result.textContent = total;
 }
 
-function substract() {}
-
-// 1. Sprawdza jaki to jest typ buttona
-// 2.  Jesli jest to number
-//     a) dodaje do operateNumber
-// 3.  jesli jest to operator
-//     a) sprawdza jaki jest ot operator\
-//     b) do kazdego operatora przypisuje jakas funkcje
-//     d) resetuje operateNumber
-
-function operate() {
-  if (this.dataset.type === "number") {
-    operateNumber == 0 ? (operateNumber = this.value) : (operateNumber += this.value);
-    console.log(operateNumber);
+function equals() {
+  if (total == null) {
+    total = operateNumber;
+    operateNumber = null;
   }
 
-  if (this.dataset.type === "operator") {
-    if (total === 0) {
-      total = parseInt(operateNumber);
-      operateNumber = 0;
-    }
+  if (operateNumber == null) return;
 
-    add();
-    operateNumber = 0;
+  parseTotal = parseInt(total);
+  parseOperateNumber = parseInt(operateNumber);
+
+  switch (operator[0]) {
+    case "+":
+      mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
+      total = parseTotal + parseOperateNumber;
+      operateNumber = null;
+      displayOperations();
+      break;
+    case "-":
+      mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
+      total = parseTotal - parseOperateNumber;
+      operateNumber = null;
+      displayOperations();
+      break;
+    case "x":
+      mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
+      total = parseTotal * parseOperateNumber;
+      operateNumber = null;
+      displayOperations();
+      break;
+    case "/":
+      mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
+      total = parseTotal / parseOperateNumber;
+      operateNumber = null;
+      displayOperations();
+      break;
+    case "%":
+      mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
+      total = parseTotal % parseOperateNumber;
+      operateNumber = null;
+      displayOperations();
+
+      break;
+  }
+}
+
+function operate() {
+  if (this.dataset.type == "number") {
+    operateNumber == null ? (operateNumber = this.value) : (operateNumber += this.value);
+    result.textContent = operateNumber;
+  }
+
+  if (this.dataset.type == "operator") {
+    operator = [];
+    switch (this.value) {
+      case "+":
+        operator.push(this.value);
+        equals();
+        displayOperations();
+        break;
+      case "-":
+        operator.push(this.value);
+        equals();
+        displayOperations();
+        break;
+      case "x":
+        operator.push(this.value);
+        equals();
+        displayOperations();
+        break;
+      case "/":
+        operator.push(this.value);
+        equals();
+        displayOperations();
+        break;
+      case "%":
+        operator.push(this.value);
+        equals();
+        displayOperations();
+        break;
+    }
+  }
+
+  if (this.dataset.type == "equals") {
+    mathOperation = "";
+    equals();
+    displayResult();
   }
 }
 
