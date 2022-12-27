@@ -11,7 +11,6 @@ const allButtons = document.querySelectorAll(".buttons button");
 const userInput = document.querySelector(".user-input");
 const result = document.querySelector(".result");
 
-let numbersArray = [];
 let operateNumber = 0;
 let total = 0;
 
@@ -20,67 +19,37 @@ function displayResult() {
 }
 
 function add() {
-  // if (total == 0) return;
+  if (operateNumber === 0) return;
 
-  total = numbersArray.reduce((total, number) => {
-    return (total += number);
-  });
+  total += parseInt(operateNumber);
   displayResult();
 }
 
+function substract() {}
+
+// 1. Sprawdza jaki to jest typ buttona
+// 2.  Jesli jest to number
+//     a) dodaje do operateNumber
+// 3.  jesli jest to operator
+//     a) sprawdza jaki jest ot operator\
+//     b) do kazdego operatora przypisuje jakas funkcje
+//     d) resetuje operateNumber
+
 function operate() {
-  const buttonType = this.dataset.type;
-
-  if (buttonType === "number") {
+  if (this.dataset.type === "number") {
     operateNumber == 0 ? (operateNumber = this.value) : (operateNumber += this.value);
+    console.log(operateNumber);
   }
-  numbersArray[0] = parseInt(operateNumber);
-  numbersArray[1] = parseInt(total);
 
-  console.log(total);
-  console.log(numbersArray);
-  userInput.textContent = operateNumber;
-
-  if (buttonType === "operator") {
-    operateNumber = 0;
-    switch (this.value) {
-      case "+":
-        add();
-        break;
-      case "-":
-        console.log("+");
-        break;
-      case "x":
-        console.log("+");
-        break;
-      case "/":
-        console.log("+");
-        break;
-      case "%":
-        console.log("+");
-        break;
+  if (this.dataset.type === "operator") {
+    if (total === 0) {
+      total = parseInt(operateNumber);
+      operateNumber = 0;
     }
-    operationNumber = 0;
+
+    add();
+    operateNumber = 0;
   }
-
-  if (buttonType === "equals") equals();
 }
-
-// let total = 0;
-// let operationNumber = 0;
-// let parseNumber = 0;
-
-// function equals() {
-//   result.textContent(total);
-// }
-
-// function add() {
-//   if (total === 0) {
-//     total = parseNumber;
-//     parseNumber = 0;
-//   }
-
-//   total += parseNumber;
-// }
 
 allButtons.forEach((button) => button.addEventListener("click", operate));
