@@ -122,6 +122,20 @@ function operate() {
     equals();
     displayResult();
   }
+
+  if (this.dataset.type == "reset") {
+    operator = [];
+    operateNumber = null;
+    total = null;
+    mathOperation = "";
+    displayResult();
+  }
+
+  if (this.dataset.type == "clear") {
+    if (operateNumber == null) return;
+    operateNumber = operateNumber.slice(0, -1);
+    result.textContent = operateNumber;
+  }
 }
 
 allButtons.forEach((button) => button.addEventListener("click", operate));
