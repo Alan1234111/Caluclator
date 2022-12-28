@@ -1,10 +1,3 @@
-// Uzytkownik wprowadza liczbe
-// liczba ta zapisywana jest jako operateNumber
-// jesli uzytkownik nacisnie jakis operator
-//   do liczby z total zostaje wykonana akcja z operatora
-//   w result wyswietlana jest liczba total
-//   w inputUser wyswietlana jest liczba total wraz z operatorem
-
 const allButtons = document.querySelectorAll(".buttons button");
 const operationsInput = document.querySelector(".operations-input");
 const result = document.querySelector(".result");
@@ -40,34 +33,36 @@ function equals() {
       mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
       total = parseTotal + parseOperateNumber;
       operateNumber = 0;
-      displayOperations();
+
       break;
     case "-":
       mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
       total = parseTotal - parseOperateNumber;
       operateNumber = 0;
-      displayOperations();
       break;
     case "x":
       mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
       total = parseTotal * parseOperateNumber;
       operateNumber = 0;
-      displayOperations();
       break;
     case "/":
       mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
       total = parseTotal / parseOperateNumber;
       operateNumber = 0;
-      displayOperations();
       break;
     case "%":
       mathOperation = `${total} ${operator[0]} ${operateNumber} =`;
       total = parseTotal % parseOperateNumber;
       operateNumber = 0;
-      displayOperations();
 
       break;
   }
+  displayOperations();
+}
+
+function changeOperator(clickedOperator) {
+  operator = [];
+  operator.push(clickedOperator);
 }
 
 function operate() {
@@ -89,36 +84,31 @@ function operate() {
     switch (this.value) {
       case "+":
         equals();
-        operator = [];
-        operator.push(this.value);
+        changeOperator(this.value);
         equals();
         displayOperations();
         break;
       case "-":
         equals();
-        operator = [];
-        operator.push(this.value);
+        changeOperator(this.value);
         equals();
         displayOperations();
         break;
       case "x":
         equals();
-        operator = [];
-        operator.push(this.value);
+        changeOperator(this.value);
         equals();
         displayOperations();
         break;
       case "/":
         equals();
-        operator = [];
-        operator.push(this.value);
+        changeOperator(this.value);
         equals();
         displayOperations();
         break;
       case "%":
         equals();
-        operator = [];
-        operator.push(this.value);
+        changeOperator(this.value);
         equals();
         displayOperations();
         break;
